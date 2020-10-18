@@ -33,9 +33,9 @@ class MoviesListOrAdd(Resource):
 
 	def post(self):
 		new_movie = Movie(
-			title=request.json['title'],
-			description=request.json['description'],
-			year=request.json['year']
+			title = request.json['title'],
+			description = request.json['description'],
+			year = request.json['year']
 		)
 		database.session.add(new_movie)
 		database.session.commit()
@@ -65,7 +65,7 @@ class MovieAccess(Resource):
 
 	def delete(self, movie_id):
 		movie = Movie.query.get_or_404(movie_id)
-		movie.delete()
+		database.session.delete(movie)
 		database.session.commit()
 
 		return '', 204
